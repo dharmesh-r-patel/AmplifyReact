@@ -1,28 +1,51 @@
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Page from "./navigation/Page";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React With Auth
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = ({ routes }) => (
+  // We use <BrowserRouter> in order to support
+  // routing example hosted on GitHub pages.
+  // <BrowserRouter> could be safely replaced with <Router> in
+  // your production application.
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Switch>
+      {routes.map((route) => (
+        <Route key={route.path} path={route.path}>
+          <Page route={route} />
+        </Route>
+      ))}
+    </Switch>
+  </BrowserRouter>
+);
 
 export default App;
+
+// import logo from "./logo.svg";
+// import "./App.css";
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React With Auth
+//         </a>
+//       </header>
+//     </div>
+//   );
+// }
+
+// export default App;
 
 // import React from "react";
 // import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
